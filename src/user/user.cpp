@@ -1,36 +1,32 @@
 #include <iostream>
-#include "../utils/utils.hpp"
+#include "user.hpp"
 
-class User {
+User::User () {}
 
-    protected:
-        std::string user_id;
-        std::string password;
-        int balance;
+User::User (std::string nama, std::string ttd, std::string status) {
+    this->nama = nama;
+    this->ttl = ttd;
+    this->status = status;
+    this->balance = 0;
 
-    public:
-        std::string nama;
-        std::string ttl;
-        std::string status;
+}
 
-        User () { this->balance = -1; } // -1 menandakan pelanggan baru
+User::User (std::string nama, std::string ttl, std::string status, std::string user_id, int balance, std::string hash, std::string salt) {
+    this->nama = nama;
+    this->ttl = ttl;
+    this->status = status;
+    this->user_id = user_id;
+    this->balance = balance;
+    this->hash = hash;
+    this->salt = salt;
 
-        User (std::string nama, std::string ttd, std::string status) {
-            this->nama = nama;
-            this->ttl = ttd;
-            this->status = status;
-            this->balance = 0;
+}
 
-        }
+void User::print_info() {
+    std::cout << "===== INFORMASI AKUN =====" << std::endl;
+    std::cout << "Nama: " << this->nama << std::endl;
+    std::cout << "Tempat / Tanggal Lahir: " << this->ttl << std::endl;
+    std::cout << "Status: " << this->status << std::endl;
+    std::cout << "Saldo: " << this->balance << std::endl;
 
-        User (std::string nama, std::string ttd, std::string status, std::string user_id, std::string password, int balance) {
-            this->nama = nama;
-            this->ttl = ttl;
-            this->status = status;
-            this->user_id = user_id;
-            this->password = password;
-            this->balance = balance;
-
-        }
-
-};
+}

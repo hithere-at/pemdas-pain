@@ -1,5 +1,7 @@
+#include <iostream>
 #include <fstream>
-#include "utils.hpp"
+#include "../user/user.hpp"
+// #include "utils.hpp"
 
 int num_input(std::string prompt, int lower, int upper) {
 
@@ -92,3 +94,16 @@ void load_db_from_file(Pelanggan *db) {
 
 }
 
+int main() {
+
+    int pel_len = get_db_user_len();
+    Pelanggan *pel = new Pelanggan[pel_len];
+    load_db_from_file(pel);
+
+    for (int i = 0; i < pel_len; i++) {
+        pel[i].print_info();
+
+    }
+
+    return 0;
+}

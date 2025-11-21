@@ -1,6 +1,7 @@
 #include <cstdint>
-#include <chrono>
-#include "hash.hpp"
+#include <ctime>
+#include <iostream>
+//#include "hash.hpp"
 
 std::string pw_hash(std::string in, std::string salt) {
 
@@ -38,15 +39,40 @@ std::string pw_hash(std::string in, std::string salt) {
 
 std::string gen_salt(int len) {
 
-    std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    std::string chars = "ABCDEFGIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     std::string buf = "";
     std::srand(std::time(nullptr));
 
     for (int i = 0; i < len; i++) {
-        buf += chars[(rand() % 61)];
+        buf += chars[(rand() % 62)];
 
     }
 
     return buf;
+
+}
+
+int main() {
+
+    std::string salt;
+    std::string hash;
+    std::string password;
+    std::string user_id;
+
+    for (int i = 0; i < 6; i++) {
+
+        std::cout << "id: ";
+        std::cin >> user_id;
+
+        std::cout << "passwd: ";
+        std::cin >> password;
+
+        salt = gen_salt(8);
+        hash = pw_hash(user_id + password, salt);
+
+        std::cout << std::endl << std::endl << "Hash: " << hash << std::endl;
+        std::cout << "Salt: " << salt << std::endl << std::endl;
+
+    }
 
 }
